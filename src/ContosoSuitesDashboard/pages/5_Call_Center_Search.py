@@ -1,5 +1,6 @@
 import streamlit as st
 from azure.cosmos import CosmosClient
+from azure.identity import DefaultAzureCredential
 import openai
 
 st.set_page_config(layout="wide")
@@ -16,7 +17,7 @@ def make_cosmos_db_vector_search_request(query_embedding, max_results=5, minimum
     - Cosmos DB endpoint, client_id, and database name stored in Streamlit secrets."""
 
     cosmos_client_id = st.secrets["cosmos"]["client_id"]
-    cosmos_credentials = DefaultAzureCredential(managed_identity_client_id=cosmos_client_id)
+    cosmos_credentials = DefaultAzureCredential(managed_identity_client_id=cosmos_client_id, tenand_id="16b3c013-d300-468d-ac64-7eda0820b6d3")
 
     cosmos_endpoint = st.secrets["cosmos"]["endpoint"]
     cosmos_database_name = st.secrets["cosmos"]["database_name"]
